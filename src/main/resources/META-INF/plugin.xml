@@ -1,15 +1,29 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.odinlevi.simpletitlesmodified</id>
-    <name>simple-titles-modified</name>
-    <vendor>odinlevi</vendor>
+<id>com.github.odi.simpletitlesmodified</id>
+<name>simple-tiles-modified</name>
+<vendor>odi</vendor>
 
-    <depends>com.intellij.modules.platform</depends>
+<depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+<resource-bundle>messages.MyBundle</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.odinlevi.simpletitlesmodified.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.odinlevi.simpletitlesmodified.startup.MyProjectActivity" />
-    </extensions>
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <toolWindow factoryClass="com.github.odi.simpletitlesmodified.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>-->
+<!--        <postStartupActivity implementation="com.github.odi.simpletitlesmodified.startup.MyProjectActivity" />-->
+<!--    </extensions>-->
+
+<extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceInterface="com.intellij.openapi.wm.impl.FrameTitleBuilder"
+                        serviceImplementation="com.github.odi.simpletitlesmodified.SimpleFrameTitleBuilder"
+                        overrides="true"
+    />
+    <applicationConfigurable parentId="tools"
+                             instance="com.github.odi.simpletitlesmodified.TitleConfiguration"
+                             id="com.github.odi.simpletitlesmodified.TitleConfiguration"
+                             displayName="Simple Title Format"
+    />
+    <applicationService
+            serviceImplementation="com.github.odi.simpletitlesmodified.TitleSettingsState"/>
+</extensions>
 </idea-plugin>
